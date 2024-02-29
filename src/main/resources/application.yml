@@ -1,0 +1,3 @@
+spring:
+  application:
+    title: "My app"

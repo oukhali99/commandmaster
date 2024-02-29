@@ -1,0 +1,44 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.2.3'
+	id 'io.spring.dependency-management' version '1.1.4'
+	id 'org.openjfx.javafxplugin' version '0.1.0'
+}
+
+javafx {
+	version = "21.0.2"
+	modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
+
+group = 'com.oukhali99'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = '17'
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.openjfx:javafx-base'
+	implementation 'org.openjfx:javafx-controls'
+	implementation 'org.openjfx:javafx-fxml'
+	implementation 'org.openjfx:javafx-graphics'
+	implementation 'org.springframework.boot:spring-boot-starter'
+
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
