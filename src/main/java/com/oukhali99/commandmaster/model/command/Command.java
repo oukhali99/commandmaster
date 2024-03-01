@@ -1,6 +1,7 @@
 package com.oukhali99.commandmaster.model.command;
 
 import com.oukhali99.commandmaster.model.command.argument.CommandArgument;
+import com.oukhali99.commandmaster.model.command.argument.TextCommandArgument;
 import lombok.Getter;
 
 import java.util.LinkedList;
@@ -42,4 +43,7 @@ public class Command {
         return stringBuilder.toString();
     }
 
+    public void removeArgument(TextCommandArgument textCommandArgument) {
+        argumentList.remove(textCommandArgument);
+    }
 }

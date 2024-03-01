@@ -10,11 +10,14 @@
 
 <AnchorPane fx:id="root" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.oukhali99.commandmaster.uicontrollers.CommandViewController">
    <children>
-      <VBox alignment="TOP_CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox alignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Label fx:id="combinedCommandLabel" text="Final Combined Command" />
-            <VBox fx:id="argumentsVBox" />
-            <HBox alignment="TOP_CENTER">
+            <VBox fx:id="argumentsVBox" alignment="CENTER">
+               <children>
+                  <fx:include source="TextCommandArgumentView.fxml" />
+               </children></VBox>
+            <HBox alignment="CENTER">
                <children>
                   <TextField fx:id="argumentTextField" />
                   <Button mnemonicParsing="false" onAction="#addArgumentAction" text="Add Argument" />
