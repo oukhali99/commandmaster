@@ -18,48 +18,33 @@ import org.springframework.stereotype.Component;
 public class NewCommandViewController {
 
     @FXML
-    private TextField commandValueTextField;
+    private TextField nameTextField;
 
     @FXML
-    private Label label;
+    private TextField commandValueTextField;
 
     @Autowired
     private CommandService commandService;
-
-    @Autowired
-    private ApplicationContext applicationContext;
 
     public void cancelButtonAction(ActionEvent actionEvent) {
         close();
     }
 
     public void okButtonAction(ActionEvent actionEvent) {
+        String commandName = nameTextField.getText();
         String commandValue = commandValueTextField.getText();
         if (commandValue == null) {
             return;
         }
 
-        Command newCommand = new Command("Placeholder name", commandValue);
+        Command newCommand = new Command(commandName, commandValue);
         commandService.addCommand(newCommand);
-
-        ApplicationEvent applicationEvent = new NewCommandEvent(newCommand);
-        applicationContext.publishEvent(applicationEvent);
-
         close();
     }
 
     private void close() {
-        Stage stage = (Stage) label.getScene().getWindow();
+        Stage stage = (Stage) commandValueTextField.getScene().getWindow();
         stage.close();
     }
 
-    public static class NewCommandEvent extends ApplicationEvent {
-        public NewCommandEvent(Command source) {
-            super(source);
-        }
-
-        public Command getCommand() {
-            return (Command) getSource();
-        }
-    }
 }

@@ -19,4 +19,7 @@ class CommandStorage {
         return new LinkedList<>(commandList);
     }
 
+    void removeCommand(Command command) {
+        commandList.remove(command);
+    }
 }

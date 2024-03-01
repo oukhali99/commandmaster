@@ -31,6 +31,12 @@ public class RootController {
     @Autowired
     private FXMLLoaderConfig fxmlLoaderConfig;
 
+    @Autowired
+    private CommandListViewController commandListViewController;
+
+    @Autowired
+    private CommandService commandService;
+
     public void newButtonAction(ActionEvent actionEvent) {
         try {
             FXMLLoader newCommandViewLoader = fxmlLoaderConfig.fxmlLoader(newCommandViewResource.getURL());
@@ -46,5 +52,10 @@ public class RootController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void deleteMenuButtonAction(ActionEvent actionEvent) {
+        Command selectedCommand = commandListViewController.getSelectedComand();
+        commandService.deleteCommand(selectedCommand);
     }
 }
