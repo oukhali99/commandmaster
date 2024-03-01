@@ -48,7 +48,7 @@ public class MyApplication extends Application {
                 .run(getParameters().getRaw().toArray(new String[0]));
     }
 
-    public class StageReadyEvent extends ApplicationEvent {
+    public static class StageReadyEvent extends ApplicationEvent {
 
         public StageReadyEvent(Stage source) {
             super(source);

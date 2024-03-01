@@ -9,6 +9,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationEvent;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -24,6 +26,9 @@ public class NewCommandViewController {
     @Autowired
     private CommandService commandService;
 
+    @Autowired
+    private ApplicationContext applicationContext;
+
     public void cancelButtonAction(ActionEvent actionEvent) {
         close();
     }
@@ -34,8 +39,11 @@ public class NewCommandViewController {
             return;
         }
 
-        Command newCommand = new Command(commandValue);
+        Command newCommand = new Command("Placeholder name", commandValue);
         commandService.addCommand(newCommand);
+
+        ApplicationEvent applicationEvent = new NewCommandEvent(newCommand);
+        applicationContext.publishEvent(applicationEvent);
 
         close();
     }
@@ -43,5 +51,15 @@ public class NewCommandViewController {
     private void close() {
         Stage stage = (Stage) label.getScene().getWindow();
         stage.close();
+    }
+
+    public static class NewCommandEvent extends ApplicationEvent {
+        public NewCommandEvent(Command source) {
+            super(source);
+        }
+
+        public Command getCommand() {
+            return (Command) getSource();
+        }
     }
 }

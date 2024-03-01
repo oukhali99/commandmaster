@@ -7,6 +7,7 @@ import org.springframework.oxm.Unmarshaller;
 import org.springframework.oxm.xstream.XStreamMarshaller;
 
 @Configuration
+
 public class MarshallerConfig {
 
     @Bean

@@ -8,8 +8,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Control;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.DialogPane;
+import javafx.scene.layout.AnchorPane;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
@@ -26,21 +28,8 @@ public class RootController {
     @Value("classpath:/NewCommandView.fxml")
     private Resource newCommandViewResource;
 
-    @FXML
-    private CardPane<Command> commandListCardPane;
-
-    @Autowired
-    private CommandService commandService;
-
     @Autowired
     private FXMLLoaderConfig fxmlLoaderConfig;
-
-    @FXML
-    private void initialize() {
-        for (Command command : commandService.getCommands()) {
-            commandListCardPane.getItems().add(command);
-        }
-    }
 
     public void newButtonAction(ActionEvent actionEvent) {
         try {

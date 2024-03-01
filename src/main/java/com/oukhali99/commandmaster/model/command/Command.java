@@ -1,13 +1,16 @@
 package com.oukhali99.commandmaster.model.command;
 
-import lombok.Data;
+import lombok.Getter;
 
-@Data
+@Getter
 public class Command {
+
+    private String name;
 
     private String value;
 
-    public Command(String value) {
+    public Command(String name, String value) {
+        this.name = name;
         this.value = value;
     }
 
