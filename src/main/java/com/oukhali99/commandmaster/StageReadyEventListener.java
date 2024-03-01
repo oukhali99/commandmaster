@@ -1,5 +1,6 @@
 package com.oukhali99.commandmaster;
 
+import com.oukhali99.commandmaster.config.FXMLLoaderConfig;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -20,19 +21,21 @@ public class StageReadyEventListener implements ApplicationListener<MyApplicatio
     @Value("${spring.application.title}")
     private String title;
 
-    @Value("classpath:/root.fxml")
+    @Value("classpath:/RootView.fxml")
     private Resource fxml;
 
     @Autowired
     private ApplicationContext applicationContext;
+
+    @Autowired
+    private FXMLLoaderConfig fxmlLoaderConfig;
 
     @Override
     public void onApplicationEvent(MyApplication.StageReadyEvent event) {
         Stage stage = event.getStage();
         try {
             URL url = fxml.getURL();
-            FXMLLoader fxmlLoader = new FXMLLoader(url);
-            fxmlLoader.setControllerFactory(applicationContext::getBean);
+            FXMLLoader fxmlLoader = fxmlLoaderConfig.fxmlLoader(url);
 
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root, 1280, 720);

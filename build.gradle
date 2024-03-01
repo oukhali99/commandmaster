@@ -25,6 +25,9 @@ configurations {
 
 repositories {
 	mavenCentral()
+	maven {
+		url 'https://nexus.gluonhq.com/nexus/content/repositories/releases/'
+	}
 }
 
 dependencies {
@@ -32,6 +35,13 @@ dependencies {
 	implementation 'org.openjfx:javafx-controls'
 	implementation 'org.openjfx:javafx-fxml'
 	implementation 'org.openjfx:javafx-graphics'
+
+	implementation 'com.gluonhq:charm-glisten:6.2.3'
+	implementation 'com.gluonhq.attach:util:4.0.3'
+
+	implementation 'org.springframework:spring-oxm'
+	implementation 'com.thoughtworks.xstream:xstream:1.4.17'
+
 	implementation 'org.springframework.boot:spring-boot-starter'
 
 	compileOnly 'org.projectlombok:lombok'
