@@ -13,6 +13,8 @@ import javafx.scene.input.MouseEvent;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
@@ -37,6 +39,9 @@ public class CommandListViewController implements ApplicationListener<CommandSer
     @Getter
     private Command selectedComand;
 
+    @Autowired
+    private ApplicationContext applicationContext;
+
     @FXML
     private void initialize() {
         selectedComand = null;
@@ -50,6 +55,7 @@ public class CommandListViewController implements ApplicationListener<CommandSer
                     @Override
                     public void handle(MouseEvent mouseEvent) {
                         selectedComand = command;
+                        applicationContext.publishEvent(new SelectedCommandChangedEvent(selectedComand));
                     }
                 });
 
@@ -72,4 +78,17 @@ public class CommandListViewController implements ApplicationListener<CommandSer
     public void onApplicationEvent(CommandService.CommandListChangedEvent event) {
         reInitialize();
     }
+
+    public static class SelectedCommandChangedEvent extends ApplicationEvent {
+
+        SelectedCommandChangedEvent(Command source) {
+            super(source);
+        }
+
+        Command getSelectedCommand() {
+            return (Command) getSource();
+        }
+
+    }
+
 }

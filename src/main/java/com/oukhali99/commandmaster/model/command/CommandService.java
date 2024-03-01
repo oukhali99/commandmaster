@@ -71,12 +71,12 @@ public class CommandService {
     }
 
     public static class CommandListChangedEvent extends ApplicationEvent {
-        public CommandListChangedEvent(CommandStorage commandList) {
+        CommandListChangedEvent(CommandStorage commandList) {
             super(commandList);
         }
 
-        public CommandStorage getCommandList() {
-            return (CommandStorage) getSource();
+        public List<Command> getCommandList() {
+            return ((CommandStorage) getSource()).getCommands();
         }
     }
 
