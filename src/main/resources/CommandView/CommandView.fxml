@@ -13,14 +13,33 @@
       <VBox alignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Label fx:id="combinedCommandLabel" text="Final Combined Command" />
-            <VBox fx:id="argumentsVBox" alignment="CENTER">
+            <Label text="Working Directory">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </Label>
+            <HBox alignment="CENTER">
                <children>
-                  <fx:include source="TextCommandArgumentView.fxml" />
-               </children></VBox>
+                  <Label fx:id="workingDirectoryLabel" text="N/A" />
+                  <Button mnemonicParsing="false" onMouseClicked="#onMouseClickedBrowse" text="Browse" />
+               </children>
+            </HBox>
+            <VBox fx:id="argumentsVBox" alignment="CENTER">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin></VBox>
             <HBox alignment="CENTER">
                <children>
                   <TextField fx:id="argumentTextField" />
                   <Button mnemonicParsing="false" onAction="#addArgumentAction" text="Add Argument" />
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER">
+               <children>
+                  <Button mnemonicParsing="false" onMouseClicked="#onMouseClickedExecute" text="Execute" />
                </children>
                <VBox.margin>
                   <Insets top="10.0" />

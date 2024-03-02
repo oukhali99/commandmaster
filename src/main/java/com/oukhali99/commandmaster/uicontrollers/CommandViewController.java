@@ -10,13 +10,17 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationListener;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
+import java.io.File;
 import java.io.IOException;
 
 @Component
@@ -45,6 +49,9 @@ public class CommandViewController implements ApplicationListener<CommandListVie
         refresh();
     }
 
+    @FXML
+    private Label workingDirectoryLabel;
+
     public void refresh() {
         // Set as invisible
         root.setVisible(false);
@@ -62,6 +69,9 @@ public class CommandViewController implements ApplicationListener<CommandListVie
         for (CommandArgument argument : selectedCommand.getArguments()) {
             argumentsVBox.getChildren().add(argument.getView(fxmlLoaderConfig));
         }
+
+        // Set the working directory label
+        workingDirectoryLabel.setText(selectedCommand.getWorkingDirectory().getAbsolutePath());
 
         root.setVisible(true);
     }
@@ -84,4 +94,30 @@ public class CommandViewController implements ApplicationListener<CommandListVie
         refresh();
     }
 
+    public void onMouseClickedExecute(MouseEvent mouseEvent) {
+        Command selectedCommand = commandListViewController.getSelectedComand();
+        if (selectedCommand == null) {
+            return;
+        }
+
+        selectedCommand.execute();
+    }
+
+    public void onMouseClickedBrowse(MouseEvent mouseEvent) {
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+
+        Stage stage = (Stage) workingDirectoryLabel.getScene().getWindow();
+        File selectedDirectory = directoryChooser.showDialog(stage);
+        if (selectedDirectory == null) {
+            return;
+        }
+
+        Command selectedCommand = commandListViewController.getSelectedComand();
+        if (selectedCommand == null) {
+            return;
+        }
+
+        selectedCommand.setWorkingDirectory(selectedDirectory);
+        refresh();
+    }
 }
