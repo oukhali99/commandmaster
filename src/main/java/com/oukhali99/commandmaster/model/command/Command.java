@@ -28,7 +28,7 @@ public class Command {
         this.name = name;
         this.value = value;
         argumentList = new LinkedList<>();
-        workingDirectory = new File("");
+        workingDirectory = new File(System.getProperty("user.home"));
     }
 
     public void addArgument(CommandArgument argument) {
