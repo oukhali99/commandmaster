@@ -4,6 +4,7 @@ import com.oukhali99.commandmaster.model.command.Command;
 import com.oukhali99.commandmaster.model.command.argument.TextCommandArgument;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -14,7 +15,7 @@ public class TextCommandArgumentViewController {
     private TextCommandArgument textCommandArgument;
 
     @FXML
-    private TextField textField;
+    private Label label;
 
     @Autowired
     private CommandListViewController commandListViewController;
@@ -42,7 +43,7 @@ public class TextCommandArgumentViewController {
             return;
         }
 
-        textField.setText(textCommandArgument.getStringValue());
+        label.setText(textCommandArgument.getStringValue());
     }
 
     public void setTextCommandArgument(TextCommandArgument textCommandArgument) {
